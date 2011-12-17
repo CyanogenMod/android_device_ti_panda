@@ -55,8 +55,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	audio.primary.panda \
-	audio.a2dp.default \
-	libaudioutils
+	audio.a2dp.default
 
 PRODUCT_PACKAGES += \
 	dhcpcd.conf \
