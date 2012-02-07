@@ -26,6 +26,7 @@ PRODUCT_COPY_FILES := \
 	device/ti/panda/init.omap4pandaboard.usb.rc:root/init.omap4pandaboard.usb.rc \
 	device/ti/panda/ueventd.omap4pandaboard.rc:root/ueventd.omap4pandaboard.rc \
 	device/ti/panda/media_profiles.xml:system/etc/media_profiles.xml \
+	device/ti/panda/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
 	frameworks/base/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
 	frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
@@ -57,6 +58,7 @@ PRODUCT_PACKAGES += \
 	audio.primary.panda \
 	audio.a2dp.default
 
+
 PRODUCT_PACKAGES += \
 	dhcpcd.conf \
 	TQS_D_1.7.ini \
@@ -65,6 +67,11 @@ PRODUCT_PACKAGES += \
 # Filesystem management tools
 PRODUCT_PACKAGES += \
 	make_ext4fs
+
+# BlueZ test tools
+PRODUCT_PACKAGES += \
+	hciconfig \
+	hcitool
 
 $(call inherit-product-if-exists, vendor/ti/panda/device-vendor.mk)
 $(call inherit-product, frameworks/base/build/tablet-dalvik-heap.mk)
