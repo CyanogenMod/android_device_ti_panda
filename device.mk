@@ -54,10 +54,13 @@ PRODUCT_PACKAGES += \
 	librs_jni \
 	com.android.future.usb.accessory
 
+# Audio
 PRODUCT_PACKAGES += \
 	audio.primary.panda \
 	audio.a2dp.default
 
+PRODUCT_COPY_FILES += \
+	device/ti/panda/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_PACKAGES += \
 	dhcpcd.conf \
