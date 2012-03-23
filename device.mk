@@ -74,7 +74,7 @@ PRODUCT_PACKAGES += \
 	hcitool
 
 $(call inherit-product-if-exists, vendor/ti/panda/device-vendor.mk)
-$(call inherit-product, frameworks/base/build/tablet-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
 $(call inherit-product, hardware/ti/omap4xxx/omap4.mk)
 $(call inherit-product-if-exists, vendor/ti/proprietary/omap4/ti-omap4-vendor.mk)
 $(call inherit-product, device/ti/panda/wl12xx/ti-wl12xx-vendor.mk)
