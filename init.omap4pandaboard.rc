@@ -1,14 +1,16 @@
 import init.omap4pandaboard.usb.rc
 
 on early-init
-    export EXTERNAL_STORAGE /mnt/sdcard
-    mkdir /mnt/sdcard 0000 system system
+    export EXTERNAL_STORAGE /storage/sdcard0
+    mkdir /storage 0550 system sdcard_r
+    mkdir /storage/sdcard0 0000 system system
     # for backwards compatibility
-    symlink /mnt/sdcard /sdcard
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard
 
 on post-fs-data
-    # we will remap this as /mnt/sdcard with the sdcard fuse tool
-    mkdir /data/media 0775 media_rw media_rw
+    # we will remap this as /storage/sdcard0 with the sdcard fuse tool
+    mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
     setprop vold.post_fs_data_done 1
     mkdir /data/misc/dhcp 0770 dhcp dhcp
@@ -46,7 +48,7 @@ service uim /system/bin/uim-sysfs
 	user bluetooth
 	group bluetooth net_bt_admin
 
-# create virtual SD card at /mnt/sdcard, based on the /data/media directory
+# create virtual SD card at /storage/sdcard0, based on the /data/media directory
 # daemon will drop to user/group system/media_rw after initializing
 # underlying files in /data/media will be created with user and group media_rw (1023)
 service sdcard /system/bin/sdcard /data/media 1023 1023
