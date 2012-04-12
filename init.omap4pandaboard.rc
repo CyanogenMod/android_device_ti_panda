@@ -22,9 +22,7 @@ on boot
 	chmod 0666 /dev/pvrsrvkm
 
 on fs
-	mount ext4 /dev/block/platform/omap/omap_hsmmc.0/by-name/system /system wait ro
-	mount ext4 /dev/block/platform/omap/omap_hsmmc.0/by-name/userdata /data wait noatime nosuid nodev
-	mount ext4 /dev/block/platform/omap/omap_hsmmc.0/by-name/cache /cache wait noatime nosuid nodev
+	mount_all /fstab.omap4pandaboard
 
 # change permissions for Bluetooth/FM/GPS
     chmod 0600 /sys/class/rfkill/rfkill0/state
