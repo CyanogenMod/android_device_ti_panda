@@ -16,9 +16,8 @@
 
 (cd ../../../../out/target/product/panda ; zip -r ../../../../device/ti/panda/self-extractors/full_panda-pseudo_ota.zip system)
 
-# 147483 = IRK19
 ZIP=full_panda-pseudo_ota.zip
-BUILD=master
+BUILD=imm76i
 ROOTDEVICE=panda
 DEVICE=panda
 MANUFACTURER=ti
