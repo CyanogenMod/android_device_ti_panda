@@ -84,6 +84,9 @@ PRODUCT_COPY_FILES += \
 	system/extras/bugmailer/bugmailer.sh:system/bin/bugmailer.sh \
 	system/extras/bugmailer/send_bug:system/bin/send_bug
 
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.sf.lcd_density=160
+
 $(call inherit-product-if-exists, vendor/ti/panda/device-vendor.mk)
 $(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
 $(call inherit-product, hardware/ti/omap4xxx/omap4.mk)
