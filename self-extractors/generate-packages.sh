@@ -17,7 +17,7 @@
 (cd ../../../../out/target/product/panda ; zip -r ../../../../device/ti/panda/self-extractors/full_panda-pseudo_ota.zip system)
 
 ZIP=full_panda-pseudo_ota.zip
-BUILD=imm76i
+BUILD=20120807
 ROOTDEVICE=panda
 DEVICE=panda
 MANUFACTURER=ti
@@ -32,7 +32,7 @@ do
   case $COMPANY in
   imgtec)
     TO_EXTRACT="\
-            system/vendor/bin/pvrsrvinit \
+            system/vendor/bin/pvrsrvctl \
             system/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so \
             system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so \
             system/vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so \
