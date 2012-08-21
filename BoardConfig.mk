@@ -19,6 +19,10 @@
 BOARD_USES_GENERIC_AUDIO := false
 USE_CAMERA_STUB := true
 
+# Default values, possibly overridden by BoardConfigVendor.mk
+TARGET_BOARD_INFO_FILE := device/ti/panda/board-info.txt
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/ti/panda/bluetooth
+
 # Use the non-open-source parts, if they're present
 -include vendor/ti/panda/BoardConfigVendor.mk
 
