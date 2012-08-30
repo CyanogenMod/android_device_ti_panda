@@ -34,7 +34,6 @@ PRODUCT_COPY_FILES := \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
 
 PRODUCT_PACKAGES := \
-        make_ext4fs \
 	com.android.future.usb.accessory
 
 PRODUCT_PROPERTY_OVERRIDES := \
@@ -71,7 +70,6 @@ PRODUCT_PACKAGES += \
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
-	make_ext4fs \
 	setup_fs
 
 # BlueZ test tools
