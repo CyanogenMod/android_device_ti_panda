@@ -1506,21 +1506,21 @@ static size_t out_get_buffer_size(const struct audio_stream *stream)
     return size * audio_stream_frame_size((struct audio_stream *)stream);
 }
 
-static uint32_t out_get_channels(const struct audio_stream *stream)
+static audio_channel_mask_t out_get_channels(const struct audio_stream *stream)
 {
     LOGFUNC("%s(%p)", __FUNCTION__, stream);
 
     return AUDIO_CHANNEL_OUT_STEREO;
 }
 
-static int out_get_format(const struct audio_stream *stream)
+static audio_format_t out_get_format(const struct audio_stream *stream)
 {
     LOGFUNC("%s(%p)", __FUNCTION__, stream);
 
     return AUDIO_FORMAT_PCM_16_BIT;
 }
 
-static int out_set_format(struct audio_stream *stream, int format)
+static int out_set_format(struct audio_stream *stream, audio_format_t format)
 {
     LOGFUNC("%s(%p)", __FUNCTION__, stream);
 
@@ -1694,15 +1694,7 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
 
     /* only use resampler if required */
     if (out->config.rate != DEFAULT_OUT_SAMPLING_RATE) {
-        if (out->resampler) {
-            out->resampler->resample_from_input(out->resampler,
-                    (int16_t *)buffer,
-                    &in_frames,
-                    (int16_t *)out->buffer,
-                    &out_frames);
-            buf = out->buffer;
-        }
-        else {
+        if (!out->resampler) {
             ret = create_resampler(DEFAULT_OUT_SAMPLING_RATE,
                     MM_FULL_POWER_SAMPLING_RATE,
                     2,
@@ -1713,7 +1705,12 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
                 goto exit;
             out->buffer = malloc(RESAMPLER_BUFFER_SIZE); /* todo: allow for reallocing */
         }
-
+        out->resampler->resample_from_input(out->resampler,
+                (int16_t *)buffer,
+                &in_frames,
+                (int16_t *)out->buffer,
+                &out_frames);
+        buf = out->buffer;
     } else {
         out_frames = in_frames;
         buf = (void *)buffer;
@@ -1868,7 +1865,7 @@ static size_t in_get_buffer_size(const struct audio_stream *stream)
                                  in->config.channels);
 }
 
-static uint32_t in_get_channels(const struct audio_stream *stream)
+static audio_channel_mask_t in_get_channels(const struct audio_stream *stream)
 {
     struct omap4_stream_in *in = (struct omap4_stream_in *)stream;
 
@@ -1881,14 +1878,14 @@ static uint32_t in_get_channels(const struct audio_stream *stream)
     }
 }
 
-static int in_get_format(const struct audio_stream *stream)
+static audio_format_t in_get_format(const struct audio_stream *stream)
 {
     LOGFUNC("%s(%p)", __FUNCTION__, stream);
 
     return AUDIO_FORMAT_PCM_16_BIT;
 }
 
-static int in_set_format(struct audio_stream *stream, int format)
+static int in_set_format(struct audio_stream *stream, audio_format_t format)
 {
     LOGFUNC("%s(%p, %d)", __FUNCTION__, stream, format);
 
