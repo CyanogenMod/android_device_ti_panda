@@ -2,20 +2,18 @@ import init.omap4pandaboard.usb.rc
 
 on init
     # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/shell/sdcard0 0700 shell shell
-    mkdir /storage/sdcard0 0000 root root
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage/emulated 0000 root root
 
-    export EXTERNAL_STORAGE /storage/sdcard0
-    export ADB_EXTERNAL_STORAGE /mnt/shell/sdcard0/0
-    export MULTIUSER_EXTERNAL_STORAGE /mnt/shell/sdcard0
+    export EXTERNAL_STORAGE /storage/emulated/legacy
+    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+    export EMULATED_STORAGE_TARGET /storage/emulated
 
     # Support legacy paths
-    symlink /storage/sdcard0 /sdcard
-    symlink /storage/sdcard0 /mnt/sdcard
-
-    # Save bugreports as owner
-    export BUGREPORT_WRITE_PATH /mnt/shell/sdcard0/0
-    export BUGREPORT_READ_PATH /storage/sdcard0
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
+    symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
 on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
