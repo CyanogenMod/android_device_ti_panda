@@ -7,3 +7,6 @@
 #for SYSLINK
 /dev/rpmsg-omx0           0666   system     system
 /dev/rpmsg-omx1           0666   system     system
+
+# for Bluetooth
+/dev/hci_tty              0666   root       root
