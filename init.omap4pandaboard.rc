@@ -41,7 +41,8 @@ on fs
 	write /sys/power/wake_lock hack
 
 # bugreport is triggered by holding down the user button and left mouse button
-service bugreport /system/bin/bugmailer.sh -v
+service bugreport /system/bin/dumpstate -d -p -B \
+        -o /data/data/com.android.shell/files/bugreports/bugreport
 	class main
 	disabled
 	oneshot

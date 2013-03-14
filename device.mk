@@ -78,11 +78,6 @@ PRODUCT_PACKAGES += \
 	hciconfig \
 	hcitool
 
-PRODUCT_PACKAGES += send_bug
-PRODUCT_COPY_FILES += \
-	system/extras/bugmailer/bugmailer.sh:system/bin/bugmailer.sh \
-	system/extras/bugmailer/send_bug:system/bin/send_bug
-
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.sf.lcd_density=160
 
